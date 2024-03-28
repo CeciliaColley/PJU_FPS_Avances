@@ -2,7 +2,11 @@
 
 ## Purpose
 
+<<<<<<< HEAD
 This script is responsible for changing the color of a scope based on whether the gun is pointed at an enemy or not. It relies on an `EnemyDetection` component attached to the gun to determine enemy presence.
+=======
+This script is responsible for changing the color of a scope based on whether the gun is pointed at an enemy or not. It relies on an `EnemyDetection` component to determine enemy presence.
+>>>>>>> git/master
 
 ## Variables
 
