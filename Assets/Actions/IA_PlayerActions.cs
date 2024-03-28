@@ -352,6 +352,45 @@ public partial class @IA_PlayerActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""GunActions"",
+            ""id"": ""fd4130f3-f372-4c17-949e-843235f2168e"",
+            ""actions"": [
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""7183c41c-60f9-4d50-85f5-16f5aa00520f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e17b730f-2d45-4fb8-9682-73ab5e925b4e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""73487993-0ceb-42d6-8c02-361eea67148b"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -373,6 +412,9 @@ public partial class @IA_PlayerActions: IInputActionCollection2, IDisposable
         m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
         m_PlayerActions_Look = m_PlayerActions.FindAction("Look", throwIfNotFound: true);
         m_PlayerActions_Move = m_PlayerActions.FindAction("Move", throwIfNotFound: true);
+        // GunActions
+        m_GunActions = asset.FindActionMap("GunActions", throwIfNotFound: true);
+        m_GunActions_Shoot = m_GunActions.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -500,6 +542,52 @@ public partial class @IA_PlayerActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
+
+    // GunActions
+    private readonly InputActionMap m_GunActions;
+    private List<IGunActionsActions> m_GunActionsActionsCallbackInterfaces = new List<IGunActionsActions>();
+    private readonly InputAction m_GunActions_Shoot;
+    public struct GunActionsActions
+    {
+        private @IA_PlayerActions m_Wrapper;
+        public GunActionsActions(@IA_PlayerActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Shoot => m_Wrapper.m_GunActions_Shoot;
+        public InputActionMap Get() { return m_Wrapper.m_GunActions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GunActionsActions set) { return set.Get(); }
+        public void AddCallbacks(IGunActionsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GunActionsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GunActionsActionsCallbackInterfaces.Add(instance);
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
+        }
+
+        private void UnregisterCallbacks(IGunActionsActions instance)
+        {
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
+        }
+
+        public void RemoveCallbacks(IGunActionsActions instance)
+        {
+            if (m_Wrapper.m_GunActionsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGunActionsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GunActionsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GunActionsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GunActionsActions @GunActions => new GunActionsActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -524,5 +612,9 @@ public partial class @IA_PlayerActions: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IGunActionsActions
+    {
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

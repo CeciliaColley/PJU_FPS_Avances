@@ -4,7 +4,7 @@
 Retrieves the CharacterController component for character movement and initializes rotation variables for consistent starting orientation.
 
 `Awake()`
-Initializes the playerActions variable with a new instance of IA_PlayerActions.
+Initializes the playerActions variable with a new instance of `IA_PlayerActions`.
 Reason: Initialization in `Awake()` ensures setup before other script execution, which is a Unity best practice for consistency and avoiding execution order issues.
 
 `OnEnable()` and Event Handlers:
@@ -20,7 +20,7 @@ Vertical velocity and the movement vector are updated within `ApplyGravity()`, a
 
 ## How it works
 
-The `Awake()` function initializes the playerActions variable with a new instance of `IA_PlayerActions`. Then, the `Start()` function retrieves the CharacterController component attached to the game object and initializes rotation variables for the character and camera.
+The `Awake()` function initializes the playerActions variable with a new instance of `IA_PlayerActions`. Then, the `Start()` function retrieves the `CharacterController` component attached to the game object and initializes rotation variables for the character and camera.
 
 In the `OnEnable()` function, event handlers are set up for various input actions (jump, movement, sprint, and look). When the player performs any of these actions, the corresponding functions (`Jump(), onMovementPerformed/Canceled(), onSprintPerformed/Canceled(), and LookRotation()`) are called. These event handlers are removed in the `OnDisable()` function to prevent memory leaks when the script is disabled.
 
