@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.Scripting.APIUpdating;
 using Input = UnityEngine.Input;
 
+// Find documentation on this script in the documentation folder, under the file name "FirstPersonController.txt"
+
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
 {
