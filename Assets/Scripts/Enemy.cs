@@ -15,6 +15,14 @@ public class Enemy : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         health -= damage;
+        if (health < 100)
+        {
+            ReactToDamage();
+        }
+    }
+
+    public void ReactToDamage()
+    {
         material.color = Color.yellow;
     }
 }
