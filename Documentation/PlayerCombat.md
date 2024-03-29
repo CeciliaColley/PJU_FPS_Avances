@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This script handles player combat mechanics, including shooting with a gun equipped and dealing damage to enemies.
+This script handles player combat mechanics, including shooting with a gun, if equipped, and dealing damage to enemies.
 
 ## Attach
 
