@@ -1,27 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class EnemyDetection : MonoBehaviour
 {
     [Tooltip("Layer with object's to detect.")]
     public LayerMask enemies;
-
-    private RaycastHit objectHit;
+    
+    [HideInInspector]
+    public RaycastHit objectHit;
+    public bool enemyDetected;
     private Camera look;
+
+
 
     void Start()
     {
         look = transform.parent.GetComponentInChildren<Camera>();
     }
 
-    public bool DetectEnemy()
+    private void Update()
     {
         Vector3 aim = look.transform.position;
         if (Physics.Raycast(aim, look.transform.forward, out objectHit, Mathf.Infinity, enemies))
         {
-            return true;
+            enemyDetected = true;
         }
-        else { return false; }
+        else { enemyDetected = false; }
     }
 }

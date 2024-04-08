@@ -1,28 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    public FirstPersonController player;
     public float health = 100;
     Material material;
-    
+    ExplodeWhenDies exploadWhenDies;
+    public GameObject blood;
+    NavMeshAgent agent;
+
 
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         material = GetComponent<Renderer>().material;
+        exploadWhenDies = GetComponent<ExplodeWhenDies>();
+        player = FindAnyObjectByType<FirstPersonController>();
+
+        
     }
-    public void ReceiveDamage(float damage)
+
+    private void Update()
+    {
+        agent.SetDestination(player.transform.position);
+    }
+
+    public void ReceiveDamage(float damage, Vector3 position)
     {
         health -= damage;
         if (health < 100)
         {
-            ReactToDamage();
+            ReactToDamage(position);
         }
     }
 
-    public void ReactToDamage()
+    public void ReactToDamage(Vector3 position)
     {
-        material.color = Color.yellow;
+        if (health <= 0)
+        {
+            if (exploadWhenDies)
+            {
+                exploadWhenDies.Explode();
+            }
+            Destroy(gameObject);
+        }
+        else
+        {
+            Bleed(position);
+        }
+    }
+
+    public void Bleed(Vector3 position)
+    {
+        Instantiate(blood, position, Quaternion.identity);
     }
 }

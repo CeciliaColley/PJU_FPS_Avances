@@ -14,14 +14,14 @@ public class Scope : MonoBehaviour
     private Image image;
     private EnemyDetection enemyDetection;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         enemyDetection = FindAnyObjectByType<EnemyDetection>();
         image = GetComponent<Image>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         ChangeScopeColorIfEnemyDetected();
@@ -31,7 +31,7 @@ public class Scope : MonoBehaviour
     {
         if (enemyDetection != null)
         {
-            if (enemyDetection.DetectEnemy())
+            if (enemyDetection.enemyDetected)
             {
                 image.color = enemyDetectedColor;
             }

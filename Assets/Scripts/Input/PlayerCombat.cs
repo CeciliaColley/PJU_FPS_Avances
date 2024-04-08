@@ -20,6 +20,7 @@ public class PlayerCombat : MonoBehaviour
     private void Start()
     {
         look = GetComponentInChildren<Camera>();
+        gun = GetComponentInChildren<Gun>();
     }
 
     private void OnEnable()
@@ -38,24 +39,33 @@ public class PlayerCombat : MonoBehaviour
 
     private void Shoot()
     {
-        gun = GetComponentInChildren<Gun>();
-
-        if (gun.bullets > 0)
+        if (gun != null)
         {
-            // Is gun aiming at an enemy
-            Vector3 aim = look.transform.position;
-            if (Physics.Raycast(aim, look.transform.forward, out objectHit, Mathf.Infinity, gun.enemies))
+            if (gun.bullets > 0)
             {
-                // Get the enemy script atatched to the objectHit and to invoke desired methods
-                Enemy e = objectHit.transform.GetComponentInParent<Enemy>();
-                e.ReceiveDamage(gun.hitDamage);
+                // Is gun aiming at an enemy
+                Vector3 aim = look.transform.position;
+                if (Physics.Raycast(aim, look.transform.forward, out objectHit, Mathf.Infinity, gun.enemies))
+                {
+                    //Show that the gun was shot
+                    Instantiate(gun.gunShotLine);
 
-                gun.bullets--;
+                    // Get the enemy script atatched to the objectHit and to invoke desired methods
+                    Enemy e = objectHit.transform.GetComponentInParent<Enemy>();
+                    e.ReceiveDamage(gun.hitDamage, objectHit.point);
+
+                    gun.bullets--;
+                }
+                else
+                {
+                    gun.bullets--;
+                }
             }
             else
             {
-                gun.bullets--;
+                Debug.Log("Out of bullets" + gun.bullets);
             }
         }
+        
     }
 }

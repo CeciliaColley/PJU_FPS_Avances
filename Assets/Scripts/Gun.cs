@@ -10,7 +10,9 @@ public class Gun : MonoBehaviour
     [Tooltip("Ammount of damage dealt by one shot")]
     public float hitDamage = 10;
     [Tooltip("Maximum time's the player can shoot without reloading.")]
-    public int bullets = 15;
+    public int bullets = 100;
+    [Tooltip("Smoke line that the gun generates when shooting. Is a prefab.")]
+    public GameObject gunShotLine;
 
     private void Start()
     {
