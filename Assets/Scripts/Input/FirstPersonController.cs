@@ -13,6 +13,7 @@ public class FPSController : MonoBehaviour
     private bool isRunning = false;
     private bool jumped = false;
 
+    public Animator animator;
     public Camera playerCamera;
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
@@ -26,6 +27,7 @@ public class FPSController : MonoBehaviour
     float rotationX = 0;
 
     public bool canMove = true;
+    public string animatorMovementBool = "isMoving";
 
     CharacterController characterController;
 
@@ -109,21 +111,25 @@ public class FPSController : MonoBehaviour
     void onMovementPerformed(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
+        animator.SetBool(animatorMovementBool, true);
     }
 
     void onMovementCanceled(InputAction.CallbackContext context)
     {
         movementInput = Vector2.zero;
+        animator.SetBool(animatorMovementBool, false);
     }
 
     void onSprintPerformed()
     {
         isRunning = true;
+        animator.SetBool(animatorMovementBool, true);
     }
 
     void onSprintCanceled()
     {
         isRunning = false;
+        animator.SetBool(animatorMovementBool, false);
     }
 
     void LookRotation(InputAction.CallbackContext context)
