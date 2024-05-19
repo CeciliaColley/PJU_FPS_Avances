@@ -7,7 +7,7 @@ public class PlayerState : MonoBehaviour
     public bool hasGun = false;
     [SerializeField] private bool canFish = false;
     public List<string> questNames = new();
-
+    public bool isInArena = false;
     public static PlayerState Instance;
 
     private void Awake()

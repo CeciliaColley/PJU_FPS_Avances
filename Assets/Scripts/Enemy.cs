@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    //public FirstPersonController player;
+    public FPSController player;
     public float health = 100;
     Material material;
     ExplodeWhenDies exploadWhenDies;
@@ -19,14 +19,15 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         material = GetComponent<Renderer>().material;
         exploadWhenDies = GetComponent<ExplodeWhenDies>();
-        //player = FindAnyObjectByType<FirstPersonController>();
-
-        
+        player = FindAnyObjectByType<FPSController>();
     }
 
     private void Update()
     {
-       // agent.SetDestination(player.transform.position);
+        if (PlayerState.Instance.isInArena)
+        {
+            agent.SetDestination(player.transform.position);
+        }
     }
 
     public void ReceiveDamage(float damage, Vector3 position)

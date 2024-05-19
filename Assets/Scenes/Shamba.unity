@@ -2897,6 +2897,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 533634368}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &126173272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8815006529140020895, guid: 82af474e133aecc43b13656b2517f587,
+    type: 3}
+  m_PrefabInstance: {fileID: 1064789903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &127312379
 GameObject:
   m_ObjectHideFlags: 0
@@ -13010,6 +13016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efefa8bfcf1ce747b0996d2af1f313b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterCanvas: {fileID: 126173272}
   cameraSwitcher: {fileID: 1205025814}
 --- !u!4 &659610368 stripped
 Transform:
@@ -24015,6 +24022,7 @@ MonoBehaviour:
   hasGun: 0
   canFish: 0
   questNames: []
+  isInArena: 0
 --- !u!4 &1205025813
 Transform:
   m_ObjectHideFlags: 0
@@ -24047,7 +24055,8 @@ MonoBehaviour:
   fence: {fileID: 8460374823523096392, guid: ad5064964174911409a866613e172632, type: 3}
   spawnPoint: {x: 8.3, y: 2.13, z: -4.27}
   spawnRotation: {x: 0, y: 0, z: 0, w: 0}
-  switchBackTime: 5
+  switchBackTime: 3.5
+  switchedBack: 0
 --- !u!1001 &1210512183
 PrefabInstance:
   m_ObjectHideFlags: 0

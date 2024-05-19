@@ -11,6 +11,8 @@ public class CameraSwitcher : MonoBehaviour
     [SerializeField] private Quaternion spawnRotation;
     [SerializeField] private float switchBackTime = 5f;  // Time in seconds before switching back to the main camera
 
+    public bool switchedBack = false;
+
     private void Start()
     {
         // Ensure main camera is active and spawn camera is inactive at the start
@@ -37,5 +39,7 @@ public class CameraSwitcher : MonoBehaviour
         // Switch back to the main camera
         lockedInCamera.gameObject.SetActive(false);
         mainCamera.gameObject.SetActive(true);
+
+        switchedBack = true;
     }
 }
