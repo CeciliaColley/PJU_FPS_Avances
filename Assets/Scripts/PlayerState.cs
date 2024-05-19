@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
-    [SerializeField] private bool hasGun = false;
+    public bool hasGun = false;
     [SerializeField] private bool canFish = false;
+
+    public static PlayerState Instance;
+
+    private void Awake()
+    {
+        // start of new code
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        // end of new code
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 }

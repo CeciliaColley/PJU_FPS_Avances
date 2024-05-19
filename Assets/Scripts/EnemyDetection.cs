@@ -14,7 +14,6 @@ public class EnemyDetection : MonoBehaviour
     private Camera look;
 
 
-
     void Start()
     {
         look = transform.parent.GetComponentInChildren<Camera>();
