@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject blood;
     [SerializeField] private float damage = 5.0f;
     [SerializeField]private float damageInterval = 2.0f; // Interval in seconds
+    [SerializeField] private GameObject happyFlower;
 
     private void Start()
     {
@@ -67,6 +68,7 @@ public class Enemy : MonoBehaviour
             {
                 exploadWhenDies.Explode();
             }
+            Instantiate(happyFlower, transform.position, transform.rotation);
             Destroy(gameObject);
         }
         else
@@ -87,6 +89,16 @@ public class Enemy : MonoBehaviour
         if (fPSController != null)
         {
             isTouchingPlayer = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        FPSController fPSController = other.GetComponent<FPSController>();
+
+        if (fPSController != null)
+        {
+            isTouchingPlayer = false;
         }
     }
 }

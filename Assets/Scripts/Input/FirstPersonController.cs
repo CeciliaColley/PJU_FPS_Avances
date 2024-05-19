@@ -128,7 +128,6 @@ public class FPSController : MonoBehaviour
 
     void onSprintCanceled()
     {
-        isRunning = false;
         animator.SetBool(animatorMovementBool, false);
     }
 

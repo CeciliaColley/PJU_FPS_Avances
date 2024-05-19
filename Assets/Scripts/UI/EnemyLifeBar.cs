@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LifeBar : MonoBehaviour
+public class EnemyLifeBar: MonoBehaviour
 {
     private EnemyDetection enemyDetection;
     public GameObject enemyLifeBar;

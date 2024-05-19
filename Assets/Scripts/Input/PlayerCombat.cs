@@ -39,7 +39,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Shoot()
     {
-        if (gun != null)
+        if (gun != null && PlayerState.Instance.hasGun)
         {
             if (gun.bullets > 0)
             {

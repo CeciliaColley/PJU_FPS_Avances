@@ -18,8 +18,7 @@ public class PlayerState : MonoBehaviour
     public bool isInArena = false;
     public static PlayerState Instance;
     public float health;
-
-    private float maxHealth = 200.0f;
+    public float maxHealth = 200.0f;
 
     private void Awake()
     {

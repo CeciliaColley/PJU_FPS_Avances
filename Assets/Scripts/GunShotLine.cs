@@ -20,6 +20,7 @@ public class GunShotLine : MonoBehaviour
         {
             startPoint = gun.transform.position;
             endPoint = enemyDetection.objectHit.transform.position;
+
         }
 
         lineRenderer.SetPosition(0, startPoint);
