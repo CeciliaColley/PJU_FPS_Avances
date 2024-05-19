@@ -391,6 +391,76 @@ public partial class @IA_PlayerActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GameControls"",
+            ""id"": ""77e07429-b35a-48a8-b614-a2665454b07e"",
+            ""actions"": [
+                {
+                    ""name"": ""GoToMainMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""3aeb8187-e194-429d-9830-fc179f4ff6c0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenQuestBook"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ffb13c0-9e14-4a5c-b0c4-8be04e3b5440"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""972ce503-f0d7-4f67-a967-4e0401fd5c69"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad;Keyboard"",
+                    ""action"": ""GoToMainMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f77e7c13-9d75-4609-b559-4f7f39128afd"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard;Gamepad"",
+                    ""action"": ""GoToMainMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47973faa-b0c8-407a-a283-06670c535817"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard;Gamepad"",
+                    ""action"": ""OpenQuestBook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4efb5503-c032-47c0-a505-ba7c69fa3d46"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard;Gamepad"",
+                    ""action"": ""OpenQuestBook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -415,6 +485,10 @@ public partial class @IA_PlayerActions: IInputActionCollection2, IDisposable
         // GunActions
         m_GunActions = asset.FindActionMap("GunActions", throwIfNotFound: true);
         m_GunActions_Shoot = m_GunActions.FindAction("Shoot", throwIfNotFound: true);
+        // GameControls
+        m_GameControls = asset.FindActionMap("GameControls", throwIfNotFound: true);
+        m_GameControls_GoToMainMenu = m_GameControls.FindAction("GoToMainMenu", throwIfNotFound: true);
+        m_GameControls_OpenQuestBook = m_GameControls.FindAction("OpenQuestBook", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -588,6 +662,60 @@ public partial class @IA_PlayerActions: IInputActionCollection2, IDisposable
         }
     }
     public GunActionsActions @GunActions => new GunActionsActions(this);
+
+    // GameControls
+    private readonly InputActionMap m_GameControls;
+    private List<IGameControlsActions> m_GameControlsActionsCallbackInterfaces = new List<IGameControlsActions>();
+    private readonly InputAction m_GameControls_GoToMainMenu;
+    private readonly InputAction m_GameControls_OpenQuestBook;
+    public struct GameControlsActions
+    {
+        private @IA_PlayerActions m_Wrapper;
+        public GameControlsActions(@IA_PlayerActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @GoToMainMenu => m_Wrapper.m_GameControls_GoToMainMenu;
+        public InputAction @OpenQuestBook => m_Wrapper.m_GameControls_OpenQuestBook;
+        public InputActionMap Get() { return m_Wrapper.m_GameControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameControlsActions set) { return set.Get(); }
+        public void AddCallbacks(IGameControlsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GameControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameControlsActionsCallbackInterfaces.Add(instance);
+            @GoToMainMenu.started += instance.OnGoToMainMenu;
+            @GoToMainMenu.performed += instance.OnGoToMainMenu;
+            @GoToMainMenu.canceled += instance.OnGoToMainMenu;
+            @OpenQuestBook.started += instance.OnOpenQuestBook;
+            @OpenQuestBook.performed += instance.OnOpenQuestBook;
+            @OpenQuestBook.canceled += instance.OnOpenQuestBook;
+        }
+
+        private void UnregisterCallbacks(IGameControlsActions instance)
+        {
+            @GoToMainMenu.started -= instance.OnGoToMainMenu;
+            @GoToMainMenu.performed -= instance.OnGoToMainMenu;
+            @GoToMainMenu.canceled -= instance.OnGoToMainMenu;
+            @OpenQuestBook.started -= instance.OnOpenQuestBook;
+            @OpenQuestBook.performed -= instance.OnOpenQuestBook;
+            @OpenQuestBook.canceled -= instance.OnOpenQuestBook;
+        }
+
+        public void RemoveCallbacks(IGameControlsActions instance)
+        {
+            if (m_Wrapper.m_GameControlsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGameControlsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GameControlsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GameControlsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GameControlsActions @GameControls => new GameControlsActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -616,5 +744,10 @@ public partial class @IA_PlayerActions: IInputActionCollection2, IDisposable
     public interface IGunActionsActions
     {
         void OnShoot(InputAction.CallbackContext context);
+    }
+    public interface IGameControlsActions
+    {
+        void OnGoToMainMenu(InputAction.CallbackContext context);
+        void OnOpenQuestBook(InputAction.CallbackContext context);
     }
 }

@@ -15,14 +15,6 @@ public class ShowQuests : MonoBehaviour
     
     private bool openBook;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            OpenQuestBook();
-        }
-    }
-
     public void OpenQuestBook()
     {
         // Toggle the flag to open the book and run the create page and write quests methods respectively.
@@ -72,7 +64,7 @@ public class ShowQuests : MonoBehaviour
                 StringBuilder stringBuilder = new();
                 foreach (string quest in PlayerState.Instance.questNames)
                 {
-                    stringBuilder.AppendLine(quest);
+                    stringBuilder.AppendLine("\u2022 " + quest);
                 }
                 questTextBox.text = stringBuilder.ToString();
             }
