@@ -15,7 +15,23 @@ public class QuestCatalyst : MonoBehaviour
     [SerializeField] private string questName;
     [SerializeField] private GameObject exclamation;
     private bool questAdded = false;
-   
+    private Collider _collider;
+
+    private void Start()
+    {
+        _collider = GetComponent<Collider>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        FPSController fPSController = other.GetComponent<FPSController>();
+
+        if (fPSController != null)
+        {
+            CreateQuest();
+        }
+    }
+
     public void CreateQuest()
     {
         if (questName != null && !questAdded) 
@@ -37,6 +53,15 @@ public class QuestCatalyst : MonoBehaviour
         if (questName != null && PlayerState.Instance.questNames.Contains(questName))
         {
             PlayerState.Instance.questNames.Remove(questName);
+        }
+        else { Debug.LogWarning("No quest was removed when interacting with " + gameObject.name + ". This is because either the field 'quest' of the QuestCatalyst script is empty, or it doesn't match any of the active quests. Please assign a valid quest to the 'quest' field, or check that the quest you are trying to remove exists."); }
+    }
+
+    public void CompleteQuest(string quest)
+    {
+        if (PlayerState.Instance.questNames.Contains(quest))
+        {
+            PlayerState.Instance.questNames.Remove(quest);
         }
         else { Debug.LogWarning("No quest was removed when interacting with " + gameObject.name + ". This is because either the field 'quest' of the QuestCatalyst script is empty, or it doesn't match any of the active quests. Please assign a valid quest to the 'quest' field, or check that the quest you are trying to remove exists."); }
     }
