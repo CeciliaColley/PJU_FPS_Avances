@@ -40,7 +40,7 @@ public class acquireGun : MonoBehaviour
             }
             if (blockade != null)
             {
-                Destroy(blockade);
+                blockade.SetActive(false);
             }
             AudioSource audioSource = GetComponent <AudioSource>();
             StartCoroutine(WaitForAudioToStop(audioSource));

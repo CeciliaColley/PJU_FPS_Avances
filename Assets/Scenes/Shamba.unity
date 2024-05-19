@@ -24019,10 +24019,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339d0a2eacab22d47a877e4457799c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasGun: 0
+  waterCanvas: {fileID: 126173272}
   canFish: 0
+  blockade: {fileID: 0}
+  player: {fileID: 1917182126}
+  resetPlayerPos: {x: -31.23, y: 2, z: -9.8}
+  loseMessage: That was rough! You can always try again later.
+  hasGun: 0
   questNames: []
   isInArena: 0
+  health: 200
 --- !u!4 &1205025813
 Transform:
   m_ObjectHideFlags: 0

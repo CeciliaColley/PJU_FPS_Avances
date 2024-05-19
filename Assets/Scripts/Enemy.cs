@@ -3,23 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
-    public FPSController player;
-    public float health = 100;
-    Material material;
-    ExplodeWhenDies exploadWhenDies;
-    public GameObject blood;
-    NavMeshAgent agent;
+    public float health = 100; // Variable used by healthbar.
 
+    private FPSController player;
+    private ExplodeWhenDies exploadWhenDies;
+    private NavMeshAgent agent;
+    private bool isTouchingPlayer = false;
+    private float timer = 0f;
+    private Vector3 initialPosition;
+
+    [SerializeField] private GameObject blood;
+    [SerializeField] private float damage = 5.0f;
+    [SerializeField]private float damageInterval = 2.0f; // Interval in seconds
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        material = GetComponent<Renderer>().material;
         exploadWhenDies = GetComponent<ExplodeWhenDies>();
         player = FindAnyObjectByType<FPSController>();
+        initialPosition = transform.position;
     }
 
     private void Update()
@@ -27,6 +33,20 @@ public class Enemy : MonoBehaviour
         if (PlayerState.Instance.isInArena)
         {
             agent.SetDestination(player.transform.position);
+        }
+        else
+        {
+            agent.SetDestination(initialPosition);
+        }
+        if (isTouchingPlayer)
+        {
+            timer += Time.deltaTime; // Increment timer by the time passed since the last frame
+
+            if (timer >= damageInterval)
+            {
+                PlayerState.Instance.ReceiveDamage(damage);
+                timer = 0f; // Reset timer after applying damage
+            }
         }
     }
 
@@ -58,5 +78,15 @@ public class Enemy : MonoBehaviour
     public void Bleed(Vector3 position)
     {
         Instantiate(blood, position, Quaternion.identity);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        FPSController fPSController = other.GetComponent<FPSController>();
+
+        if (fPSController != null)
+        {
+            isTouchingPlayer = true;
+        }
     }
 }

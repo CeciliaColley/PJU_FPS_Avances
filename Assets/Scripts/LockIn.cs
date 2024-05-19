@@ -24,6 +24,6 @@ public class LockIn : MonoBehaviour
     {
         yield return new WaitUntil(() => cameraSwitcher.switchedBack);
         PlayerState.Instance.isInArena = true;
-        waterCanvas.SetActive(true); ;
+        waterCanvas.SetActive(true);
     }
 }
