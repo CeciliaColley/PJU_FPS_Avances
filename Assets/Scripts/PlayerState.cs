@@ -6,6 +6,7 @@ public class PlayerState : MonoBehaviour
 {
     public bool hasGun = false;
     [SerializeField] private bool canFish = false;
+    public List<string> questNames = new();
 
     public static PlayerState Instance;
 

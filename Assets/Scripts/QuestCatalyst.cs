@@ -21,7 +21,7 @@ public class QuestCatalyst : MonoBehaviour
         if (questName != null && !questAdded) 
         {
             questAdded = !questAdded;
-            MainManager.mainManager.questNames.Add(questName);
+            PlayerState.Instance.questNames.Add(questName);
             exclamation.SetActive(true);
         }
         else if (questName == null) { Debug.LogWarning("No quest was added when interacting with " + gameObject.name + " because the field 'quest' in the QuestCatalyst script is empty. Please type in a valid quest to the 'quest' field in the inspector."); }
@@ -34,9 +34,9 @@ public class QuestCatalyst : MonoBehaviour
 
     public void CompleteQuest()
     {
-        if (questName != null && MainManager.mainManager.questNames.Contains(questName))
+        if (questName != null && PlayerState.Instance.questNames.Contains(questName))
         {
-            MainManager.mainManager.questNames.Remove(questName);
+            PlayerState.Instance.questNames.Remove(questName);
         }
         else { Debug.LogWarning("No quest was removed when interacting with " + gameObject.name + ". This is because either the field 'quest' of the QuestCatalyst script is empty, or it doesn't match any of the active quests. Please assign a valid quest to the 'quest' field, or check that the quest you are trying to remove exists."); }
     }

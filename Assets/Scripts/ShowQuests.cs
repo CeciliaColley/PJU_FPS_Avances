@@ -15,6 +15,14 @@ public class ShowQuests : MonoBehaviour
     
     private bool openBook;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            OpenQuestBook();
+        }
+    }
+
     public void OpenQuestBook()
     {
         // Toggle the flag to open the book and run the create page and write quests methods respectively.
@@ -31,13 +39,11 @@ public class ShowQuests : MonoBehaviour
             if (openBook) 
             { 
                 questPage.SetActive(true); 
-                notification.SetActive(false); 
-                gameObject.GetComponent<Button>().OnDeselect(null); 
+                notification.SetActive(false);
             }
             else 
             { 
                 questPage.SetActive(false); 
-                gameObject.GetComponent<Button>().OnDeselect(null); 
             }
         }
         
@@ -51,7 +57,7 @@ public class ShowQuests : MonoBehaviour
         if (questTextBox != null)
         {
             //Display default text if there are no active quests.
-            if (MainManager.mainManager.questNames.Count == 0)
+            if (PlayerState.Instance.questNames.Count == 0)
             {
                 if (noQuestsText != null)
                 {
@@ -64,7 +70,7 @@ public class ShowQuests : MonoBehaviour
             {
                 // Use a string builder to write each quest on a new line in the text box atatched to this script.
                 StringBuilder stringBuilder = new();
-                foreach (string quest in MainManager.mainManager.questNames)
+                foreach (string quest in PlayerState.Instance.questNames)
                 {
                     stringBuilder.AppendLine(quest);
                 }

@@ -23,22 +23,17 @@ public class MyCanvas : MonoBehaviour
     {
         while (true)
         {
-            if (!playerHasGun())
+            if (!PlayerState.Instance.hasGun)
             {
-                yield return new WaitUntil(playerHasGun);
+                yield return new WaitUntil(() => !PlayerState.Instance.hasGun);
                 scope.gameObject.SetActive(true);
 
             }
-            else if (playerHasGun())
+            else if (PlayerState.Instance.hasGun)
             {
-                yield return new WaitUntil(() => !playerHasGun());
+                yield return new WaitUntil(() => !PlayerState.Instance.hasGun);
                 scope.gameObject.SetActive(false);
             }
         }
-    }
-
-    private bool playerHasGun()
-    {
-        return true;
     }
 }
