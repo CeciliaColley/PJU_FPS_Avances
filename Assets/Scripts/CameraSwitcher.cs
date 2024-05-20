@@ -17,11 +17,27 @@ public class CameraSwitcher : MonoBehaviour
     {
         // Ensure main camera is active and spawn camera is inactive at the start
         mainCamera.gameObject.SetActive(true);
-        lockedInCamera.gameObject.SetActive(false);
+        if (lockedInCamera != null)
+        {
+            lockedInCamera.gameObject.SetActive(false);
+        }
+        else
+        {
+            lockedInCamera = GameObject.FindGameObjectWithTag("LockedInCamera")?.GetComponent<Camera>();
+            lockedInCamera.gameObject.SetActive(false);
+        }
     }
 
     public void SwitchCameraAndSpawn()
     {
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+        if (lockedInCamera == null)
+        {
+            lockedInCamera = GameObject.FindGameObjectWithTag("LockedInCamera")?.GetComponent<Camera>();
+        }
         StartCoroutine(SwitchCameraAndSpawnRoutine());
     }
 
@@ -60,7 +76,7 @@ public class CameraSwitcher : MonoBehaviour
             lockedInCamera.gameObject.SetActive(true);
         }
         catch (MissingReferenceException) { }
-        
+
 
         // Wait for a specified time
         yield return new WaitForSeconds(switchBackTime);

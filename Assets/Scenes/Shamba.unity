@@ -4076,7 +4076,7 @@ PrefabInstance:
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.018616581
+      value: -0.255
       objectReference: {fileID: 0}
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
@@ -11402,7 +11402,7 @@ PrefabInstance:
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0671169
+      value: -0.177
       objectReference: {fileID: 0}
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
@@ -12660,7 +12660,7 @@ PrefabInstance:
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.018616581
+      value: -0.148
       objectReference: {fileID: 0}
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
@@ -13366,7 +13366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterCanvas: {fileID: 126173272}
-  cameraSwitcher: {fileID: 1205025814}
+  cameraSwitcher: {fileID: 0}
 --- !u!4 &659610368 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3169668576073457521, guid: cf22a2db10f09a34495e9f83913738c8,
@@ -18515,7 +18515,7 @@ PrefabInstance:
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.229
       objectReference: {fileID: 0}
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
@@ -24863,8 +24863,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1205025813}
   - component: {fileID: 1205025812}
-  - component: {fileID: 1205025814}
-  - component: {fileID: 1205025815}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -24910,45 +24908,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1205025814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1205025811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 391259fbc0659ec4dbbbc60d8f406e5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 314834568}
-  lockedInCamera: {fileID: 1630708632}
-  fence: {fileID: 8460374823523096392, guid: ad5064964174911409a866613e172632, type: 3}
-  spawnPoint: {x: 8.3, y: 2.13, z: -4.27}
-  spawnRotation: {x: 0, y: 0, z: 0, w: 0}
-  switchBackTime: 3.5
-  switchedBack: 0
---- !u!114 &1205025815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1205025811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25f57f1a1d13cd745b02835c0ece36f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  radius: 50
-  center: {x: 53, y: 3.5, z: -1}
-  winMessage: The garden looks much nicer! You got +20 petals!
-  loseMessage: That was rough! You can always try again later.
-  notification: {fileID: 1904655705}
 --- !u!1001 &1205997355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29516,6 +29475,78 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1491418111}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1492707366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1492707368}
+  - component: {fileID: 1492707367}
+  - component: {fileID: 1492707369}
+  m_Layer: 0
+  m_Name: watering mechanic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1492707367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492707366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f57f1a1d13cd745b02835c0ece36f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  radius: 50
+  center: {x: 53, y: 3.5, z: -1}
+  winMessage: The garden looks much nicer! You got +20 petals!
+  loseMessage: That was rough! You can always try again later.
+  notification: {fileID: 1904655705}
+--- !u!4 &1492707368
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492707366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.97, y: 1.91, z: -4.550661}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1492707369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492707366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 391259fbc0659ec4dbbbc60d8f406e5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 314834568}
+  lockedInCamera: {fileID: 1630708632}
+  fence: {fileID: 8460374823523096392, guid: ad5064964174911409a866613e172632, type: 3}
+  spawnPoint: {x: 8.3, y: 2.13, z: -4.27}
+  spawnRotation: {x: 0, y: 0, z: 0, w: 0}
+  switchBackTime: 3.5
+  switchedBack: 0
 --- !u!1001 &1493689648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31559,11 +31590,11 @@ GameObject:
   - component: {fileID: 1630708630}
   m_Layer: 0
   m_Name: EnterArenaCamera
-  m_TagString: Untagged
+  m_TagString: LockedInCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1630708630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38000,8 +38031,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9d90842fed4a19046840bea43042d648, type: 3}
-  m_Resource: {fileID: 8300000, guid: 9d90842fed4a19046840bea43042d648, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f4f78f1f0136a994ab6dba7a19cada39, type: 3}
+  m_Resource: {fileID: 8300000, guid: f4f78f1f0136a994ab6dba7a19cada39, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -39076,17 +39107,17 @@ PrefabInstance:
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.40226677
+      value: 0.463
       objectReference: {fileID: 0}
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.247
       objectReference: {fileID: 0}
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.05277785
+      value: -0.116
       objectReference: {fileID: 0}
     - target: {fileID: 1778994357615247706, guid: ef62619642b0df743b22dd5120c6ac4d,
         type: 3}
@@ -43112,3 +43143,4 @@ SceneRoots:
   - {fileID: 2088032455}
   - {fileID: 1630708633}
   - {fileID: 702170122}
+  - {fileID: 1492707368}

@@ -32,6 +32,7 @@ public class GameControlsInput : MonoBehaviour
 
     private void GoToMainMenu(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        PlayerState.Instance.isInArena = false;
         SceneManager.LoadScene(sceneToLoad);
     }
 

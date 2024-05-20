@@ -81,11 +81,8 @@ public class PlayerCombat : MonoBehaviour
                 {
                     gun.bullets--;
                 }
-                if (!gunSound.isPlaying)
-                {
-                    gunSound.Play();
-                }
-                
+                gunSound.Play();
+
             }
             else
             {

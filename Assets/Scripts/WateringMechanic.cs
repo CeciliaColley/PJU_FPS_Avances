@@ -11,16 +11,30 @@ public class WateringMechanic : MonoBehaviour
     [SerializeField] private string loseMessage;
     [SerializeField] private GameObject notification;
 
-    private void Start()
+    private void OnEnable()
     {
-        StartCoroutine(CheckForEnemiesInArena());
+        if (!PlayerState.Instance.wateredPlants)
+        {
+            StartCoroutine(CheckForEnemiesInArena());
+        }
+        
+    }
+
+    private void Update()
+    {
+        if (CheckForEnemies())
+        {
+            PlayerState.Instance.wateredPlants = false;
+        }
+        else
+        {
+            PlayerState.Instance.wateredPlants = true;
+        }
     }
 
     private IEnumerator CheckForEnemiesInArena()
     {
-        yield return new WaitUntil(() => PlayerState.Instance.isInArena);
-        yield return new WaitUntil(() => !CheckForEnemies());
-        PlayerState.Instance.wateredPlants = true;
+        yield return new WaitUntil(() => PlayerState.Instance.isInArena && PlayerState.Instance.wateredPlants);
         CameraSwitcher cameraSwitcher = GetComponent<CameraSwitcher>();
         if (cameraSwitcher != null)
         {
