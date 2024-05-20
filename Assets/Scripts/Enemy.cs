@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +30,21 @@ public class Enemy : MonoBehaviour
         initialPosition = transform.position;
     }
 
-    private void Update()
+    private void OnEnable()
+    {
+        try
+        {
+            if (PlayerState.Instance.wateredPlants)
+            {
+                Instantiate(happyFlower, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
+        }
+        catch (NullReferenceException) { }
+        
+    }
+
+        private void Update()
     {
         if (PlayerState.Instance.isInArena)
         {

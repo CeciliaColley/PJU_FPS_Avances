@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,37 @@ public class ShooterEnemy : MonoBehaviour
         bodySMR = body.GetComponent<SkinnedMeshRenderer>();
         StartCoroutine(SetSpawnerActive());
     }
+    private void OnEnable()
+    {
+       try
+        {
+            if (PlayerState.Instance != null && PlayerState.Instance.wateredPlants)
+            {
+            // Get the array of materials from the SkinnedMeshRenderer
+                headSMR = head.GetComponent<SkinnedMeshRenderer>();
+                bodySMR = body.GetComponent<SkinnedMeshRenderer>();
+                Material[] materials = headSMR.materials;
+                // Replace the last material in the array with wateredMaterial
+                materials[materials.Length - 1] = wateredMaterial;
+                // Assign the modified array back to the SkinnedMeshRenderer
+                headSMR.materials = materials;
+                bodySMR.material = wateredMaterial;
+                spawner.SetActive(false);
+            }
+       }
+        catch (NullReferenceException) { }
+        
+    }
 
     private IEnumerator SetSpawnerActive()
     {
-        yield return new WaitUntil(() => PlayerState.Instance.isInArena);
-        spawner.SetActive(true);
-        StartCoroutine(SetSpawnerInactive());
+        if (!PlayerState.Instance.wateredPlants)
+        {
+            yield return new WaitUntil(() => PlayerState.Instance.isInArena);
+            spawner.SetActive(true);
+            StartCoroutine(SetSpawnerInactive());
+        }
+        
     }
 
     private IEnumerator SetSpawnerInactive()

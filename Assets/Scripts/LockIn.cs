@@ -9,7 +9,7 @@ public class LockIn : MonoBehaviour
     [SerializeField] private CameraSwitcher cameraSwitcher;
     private void OnTriggerEnter(Collider other)
     {
-        if (!PlayerState.Instance.isInArena)
+        if (!PlayerState.Instance.isInArena && !PlayerState.Instance.wateredPlants)
         {
             FPSController fPSController = other.GetComponent<FPSController>();
             if (cameraSwitcher == null)
