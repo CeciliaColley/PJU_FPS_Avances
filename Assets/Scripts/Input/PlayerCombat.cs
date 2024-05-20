@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,14 +46,32 @@ public class PlayerCombat : MonoBehaviour
             {
                 // Is gun aiming at an enemy
                 Vector3 aim = look.transform.position;
-                if (Physics.Raycast(aim, look.transform.forward, out objectHit, Mathf.Infinity, gun.enemies))
+                if (Physics.Raycast(aim, look.transform.forward, out RaycastHit objectHit, Mathf.Infinity, gun.enemies))
                 {
-                    //Show that the gun was shot
+                    // Show that the gun was shot
                     Instantiate(gun.gunShotLine);
 
-                    // Get the enemy script atatched to the objectHit and to invoke desired methods
-                    Enemy e = objectHit.transform.GetComponentInParent<Enemy>();
-                    e.ReceiveDamage(gun.hitDamage, objectHit.point);
+                    // Try to get the Enemy component
+                    try
+                    {
+                        // Try to get the Enemy component
+                        Enemy e = objectHit.transform.GetComponentInParent<Enemy>();
+                        e.ReceiveDamage(gun.hitDamage, objectHit.point);
+                    }
+                    catch (NullReferenceException)
+                    {
+                    }
+
+                    try
+                    {
+                        // Try to get the Enemy component
+                        ShooterEnemy shooterEnemy = objectHit.transform.GetComponentInParent<ShooterEnemy>();
+                        shooterEnemy.ReceiveDamage(gun.hitDamage, objectHit.point);
+                    }
+                    catch (NullReferenceException)
+                    {
+                    }
+                    
 
                     gun.bullets--;
                 }
@@ -63,9 +82,8 @@ public class PlayerCombat : MonoBehaviour
             }
             else
             {
-                Debug.Log("Out of bullets" + gun.bullets);
+                Debug.Log("Out of bullets: " + gun.bullets);
             }
         }
-        
     }
 }

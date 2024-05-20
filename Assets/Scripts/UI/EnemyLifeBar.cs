@@ -29,15 +29,31 @@ public class EnemyLifeBar: MonoBehaviour
     {
         if (enemyDetection.enemyDetected)
         {
-            // When enemy dies, catch the exception
+            // When enemy is detected, try to get the health and display it
             try
             {
+                // Attempt to get the health of the detected enemy
                 Enemy e = enemyDetection.objectHit.transform.GetComponentInParent<Enemy>();
-                lifeBar.fillAmount = e.health / 100;
-                enemyLifeBar.SetActive(true);
+                if (e != null)
+                {
+                    lifeBar.fillAmount = e.health / 100;
+                    enemyLifeBar.SetActive(true);
+                }
+                else
+                {
+                    // If it's not of type Enemy, try to get health of ShooterEnemy
+                    ShooterEnemy shooterEnemy = enemyDetection.objectHit.transform.GetComponentInParent<ShooterEnemy>();
+                    if (shooterEnemy != null)
+                    {
+                        lifeBar.fillAmount = shooterEnemy.health / 100;
+                        enemyLifeBar.SetActive(true);
+                    }
+                }
             }
-            catch (NullReferenceException){}
-            
+            catch (NullReferenceException)
+            {
+                // Catch null reference exceptions
+            }
         }
         else
         {

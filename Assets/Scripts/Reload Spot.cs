@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,14 @@ public class ReloadSpot : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && inCollider)
         {
-            gun.bullets = gun.maxBullets;
+            try
+            {
+                gun.bullets = gun.maxBullets;
+            }
+            catch (NullReferenceException)
+            {
+
+            }
         }
     }
 

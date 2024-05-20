@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,14 @@ public class GunShotLine : MonoBehaviour
         if (gun != null && enemyDetection != null)
         {
             startPoint = gun.transform.position;
-            endPoint = enemyDetection.objectHit.transform.position;
+            try
+            {
+                endPoint = enemyDetection.objectHit.transform.position;
+            }
+            catch (NullReferenceException)
+            {
+
+            }
 
         }
 
