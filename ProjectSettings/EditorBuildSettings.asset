@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Shamba.unity
     guid: 14051af56f044aa499e9a5a09fffc08c
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: ca14d47c5533b424baa2802bb3c4b11b
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

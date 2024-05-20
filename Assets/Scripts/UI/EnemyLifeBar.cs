@@ -36,7 +36,7 @@ public class EnemyLifeBar: MonoBehaviour
                 Enemy e = enemyDetection.objectHit.transform.GetComponentInParent<Enemy>();
                 if (e != null)
                 {
-                    lifeBar.fillAmount = e.health / 100;
+                    lifeBar.fillAmount = e.health / 50;
                     enemyLifeBar.SetActive(true);
                 }
                 else
@@ -45,7 +45,7 @@ public class EnemyLifeBar: MonoBehaviour
                     ShooterEnemy shooterEnemy = enemyDetection.objectHit.transform.GetComponentInParent<ShooterEnemy>();
                     if (shooterEnemy != null)
                     {
-                        lifeBar.fillAmount = shooterEnemy.health / 100;
+                        lifeBar.fillAmount = shooterEnemy.health / 30;
                         enemyLifeBar.SetActive(true);
                     }
                 }

@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b057008ed693054b9deea232b3a0994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 50
   blood: {fileID: 4327246804938346487, guid: c5c131151c3af764c8d08c154eecc933, type: 3}
   damage: 5
   damageInterval: 2

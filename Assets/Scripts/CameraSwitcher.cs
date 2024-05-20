@@ -42,4 +42,20 @@ public class CameraSwitcher : MonoBehaviour
 
         switchedBack = true;
     }
+
+    public IEnumerator SwitchCamera()
+    {
+        // Switch to spawn camera
+        mainCamera.gameObject.SetActive(false);
+        lockedInCamera.gameObject.SetActive(true);
+
+        // Wait for a specified time
+        yield return new WaitForSeconds(switchBackTime);
+
+        // Switch back to the main camera
+        lockedInCamera.gameObject.SetActive(false);
+        mainCamera.gameObject.SetActive(true);
+
+        switchedBack = true;
+    }
 }

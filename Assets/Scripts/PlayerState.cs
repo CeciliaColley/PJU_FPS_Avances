@@ -20,6 +20,8 @@ public class PlayerState : MonoBehaviour
     public float health;
     public float maxHealth = 200.0f;
 
+    public bool wateredPlants = false;
+
     private void Awake()
     {
         health = maxHealth;
@@ -62,4 +64,6 @@ public class PlayerState : MonoBehaviour
             questNames.Add(loseMessage);
         }
     }
+
+    
 }

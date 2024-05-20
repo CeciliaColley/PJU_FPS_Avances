@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a65347619b7f3c14d949a11ea02012f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 30
   spawner: {fileID: 8667942483027443674}
   blood: {fileID: 4327246804938346487, guid: c5c131151c3af764c8d08c154eecc933, type: 3}
   body: {fileID: 6600704774644832186}

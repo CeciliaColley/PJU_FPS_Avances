@@ -50,6 +50,7 @@ public class ShooterEnemy : MonoBehaviour
         if (health <= 0)
         {
             health = 0;
+            // This also seems bizarre to me. How can this be the best way of setting a new material D: 
             // Get the array of materials from the SkinnedMeshRenderer
             Material[] materials = headSMR.materials;
             // Replace the last material in the array with wateredMaterial
