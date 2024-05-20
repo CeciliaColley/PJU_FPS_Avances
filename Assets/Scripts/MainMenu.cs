@@ -7,6 +7,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject controlsImage;
     [SerializeField] private string sceneToLoad = "Shamba";
 
+    private void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+
     // Method to be called when the Play button is clicked
     public void PlayGame()
     {

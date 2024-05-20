@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            isTouchingPlayer = false;
             agent.SetDestination(initialPosition);
         }
         if (isTouchingPlayer)

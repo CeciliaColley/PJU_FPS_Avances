@@ -12,6 +12,7 @@ public class PlayerCombat : MonoBehaviour
     private RaycastHit objectHit;
     private Camera look;
     private Gun gun;
+    private AudioSource gunSound;
 
     private void Awake()
     {
@@ -20,6 +21,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start()
     {
+        gunSound = GetComponent<AudioSource>();
         look = GetComponentInChildren<Camera>();
         gun = GetComponentInChildren<Gun>();
     }
@@ -79,6 +81,11 @@ public class PlayerCombat : MonoBehaviour
                 {
                     gun.bullets--;
                 }
+                if (!gunSound.isPlaying)
+                {
+                    gunSound.Play();
+                }
+                
             }
             else
             {

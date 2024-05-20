@@ -28,7 +28,10 @@ public class WateringMechanic : MonoBehaviour
         }
         PlayerState.Instance.questNames.Add(winMessage);
         PlayerState.Instance.questNames.Remove(loseMessage);
-        notification.SetActive(true);
+        if (notification != null)
+        {
+            notification.SetActive(true);
+        }
     }
 
     private bool CheckForEnemies()

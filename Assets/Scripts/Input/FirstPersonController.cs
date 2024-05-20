@@ -75,31 +75,35 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
-
-        // Press Left Shift to run
-        float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * movementInput.y : 0;
-        float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * movementInput.x : 0;
-        movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
-
-        if (jumped && canMove && characterController.isGrounded)
+        if (PlayerState.Instance.health > 0)
         {
-            moveDirection.y = jumpPower;
-            jumped = false;
-        }
-        else
-        {
-            moveDirection.y = movementDirectionY;
-        }
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 right = transform.TransformDirection(Vector3.right);
 
-        if (!characterController.isGrounded)
-        {
-            moveDirection.y -= gravity * Time.deltaTime;
-        }
+            // Press Left Shift to run
+            float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * movementInput.y : 0;
+            float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * movementInput.x : 0;
+            movementDirectionY = moveDirection.y;
+            moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        characterController.Move(moveDirection * Time.deltaTime);
+            if (jumped && canMove && characterController.isGrounded)
+            {
+                moveDirection.y = jumpPower;
+                jumped = false;
+            }
+            else
+            {
+                moveDirection.y = movementDirectionY;
+            }
+
+            if (!characterController.isGrounded)
+            {
+                moveDirection.y -= gravity * Time.deltaTime;
+            }
+
+            characterController.Move(moveDirection * Time.deltaTime);
+        }
+        
     }
 
     void Jump()

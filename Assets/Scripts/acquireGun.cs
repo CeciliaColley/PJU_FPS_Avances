@@ -43,13 +43,11 @@ public class acquireGun : MonoBehaviour
                 blockade.SetActive(false);
             }
             AudioSource audioSource = GetComponent <AudioSource>();
+            Destroy(gun);
             StartCoroutine(WaitForAudioToStop(audioSource));
             
         }
     }
-
-    
-
 
     private IEnumerator WaitForAudioToStop(AudioSource audioSource)
     {
@@ -60,8 +58,6 @@ public class acquireGun : MonoBehaviour
         {
             yield return null; // Wait for the next frame
         }
-
-        Destroy(gun);
         Destroy(gameObject);
     }
 }

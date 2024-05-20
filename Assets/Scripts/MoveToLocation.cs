@@ -37,7 +37,8 @@ public class MoveToLocation : MonoBehaviour
             );
             yield return null;
         }
-
+        WateringCanvas wateringCanvas = FindAnyObjectByType<WateringCanvas>();
+        wateringCanvas.gameObject.SetActive(false);
         Destroy(gameObject);
     }
 }

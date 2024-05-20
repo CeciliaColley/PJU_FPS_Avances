@@ -28,8 +28,12 @@ public class CameraSwitcher : MonoBehaviour
     private IEnumerator SwitchCameraAndSpawnRoutine()
     {
         // Switch to spawn camera
-        mainCamera.gameObject.SetActive(false);
-        lockedInCamera.gameObject.SetActive(true);
+        try
+        {
+            mainCamera.gameObject.SetActive(false);
+            lockedInCamera.gameObject.SetActive(true);
+        }
+        catch (MissingReferenceException) { }
 
         Instantiate(fence, spawnPoint, spawnRotation);
 
@@ -37,8 +41,12 @@ public class CameraSwitcher : MonoBehaviour
         yield return new WaitForSeconds(switchBackTime);
 
         // Switch back to the main camera
-        lockedInCamera.gameObject.SetActive(false);
-        mainCamera.gameObject.SetActive(true);
+        try
+        {
+            lockedInCamera.gameObject.SetActive(false);
+            mainCamera.gameObject.SetActive(true);
+        }
+        catch (MissingReferenceException) { }
 
         switchedBack = true;
     }
@@ -46,15 +54,24 @@ public class CameraSwitcher : MonoBehaviour
     public IEnumerator SwitchCamera()
     {
         // Switch to spawn camera
-        mainCamera.gameObject.SetActive(false);
-        lockedInCamera.gameObject.SetActive(true);
+        try
+        {
+            mainCamera.gameObject.SetActive(false);
+            lockedInCamera.gameObject.SetActive(true);
+        }
+        catch (MissingReferenceException) { }
+        
 
         // Wait for a specified time
         yield return new WaitForSeconds(switchBackTime);
 
         // Switch back to the main camera
-        lockedInCamera.gameObject.SetActive(false);
-        mainCamera.gameObject.SetActive(true);
+        try
+        {
+            lockedInCamera.gameObject.SetActive(false);
+            mainCamera.gameObject.SetActive(true);
+        }
+        catch (MissingReferenceException) { }
 
         switchedBack = true;
     }
